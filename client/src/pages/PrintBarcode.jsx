@@ -11,8 +11,8 @@ const PrintBarcode = () => {
   const [weight, setWeight] = useState('');
 
   useEffect(() => {
-    axios.get('http://localhost:5000/api/items').then(res => setItems(res.data));
-    axios.get('http://localhost:5000/api/jenis').then(res => setJenis(res.data));
+    axios.get('http://10.10.10.100:5000/api/items').then(res => setItems(res.data));
+    axios.get('http://10.10.10.100:5000/api/jenis').then(res => setJenis(res.data));
   }, []);
 
   useEffect(() => {
