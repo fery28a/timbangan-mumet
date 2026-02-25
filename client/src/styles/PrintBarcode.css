@@ -1,0 +1,287 @@
+/* =========================================
+   1. LAYOUT UTAMA (3 KOLOM)
+   ========================================= */
+.print-main-layout {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #f8f9fa;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.ui-container {
+    display: flex;
+    width: 100%;
+}
+
+/* --- Kolom 1: Katalog Produk (40%) --- */
+.col-products {
+    width: 40%;
+    background: #ffffff;
+    border-right: 2px solid #dee2e6;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+}
+
+.category-filter {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 15px;
+    overflow-x: auto;
+    padding-bottom: 5px;
+}
+
+.category-filter button {
+    padding: 8px 15px;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    background: #fff;
+    cursor: pointer;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.category-filter button.active {
+    background: #007bff;
+    color: #fff;
+    border-color: #007bff;
+}
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 12px;
+    overflow-y: auto;
+}
+
+.product-card {
+    background: #fff;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.2s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.product-card.active {
+    border: 2.5px solid #28a745;
+    background: #f0fff4;
+    transform: scale(1.02);
+}
+
+.product-card img {
+    width: 65px;
+    height: 65px;
+    object-fit: cover;
+    margin-bottom: 8px;
+    border-radius: 6px;
+}
+
+.card-details {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.item-name-card {
+    font-size: 0.85rem;
+    font-weight: bold;
+    margin: 0;
+    color: #333;
+}
+
+.item-price-card {
+    font-size: 0.8rem;
+    color: #28a745;
+    font-weight: 600;
+}
+
+/* --- Kolom 2: Keypad Berat (25%) --- */
+.col-keypad {
+    width: 25%;
+    background: #1a252f;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+}
+
+.display-weight {
+    background: #000;
+    color: #00ff00;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 3.2rem;
+    padding: 15px;
+    text-align: right;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border: 2px solid #34495e;
+}
+
+.keypad-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.keypad-grid button {
+    height: 65px;
+    font-size: 1.6rem;
+    font-weight: bold;
+    background: #34495e;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.keypad-grid button:active {
+    background: #1abc9c;
+}
+
+/* --- Kolom 3: Preview Barcode (35%) --- */
+.col-preview {
+    width: 35%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #e9ecef;
+    /* Memastikan konten mulai dari atas */
+    justify-content: flex-start; 
+}
+
+.preview-title {
+    margin-bottom: 15px;
+    font-weight: bold;
+    color: #495057;
+}
+
+.label-preview-box {
+    width: 280px;
+    background: #ffffff;
+    border: 1px solid #999;
+    padding: 15px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.item-name-preview {
+    font-size: 13pt;
+    font-weight: bold;
+    text-align: center;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+.info-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10pt;
+    border-bottom: 1.5px solid #000;
+    margin: 8px 0;
+    padding-bottom: 4px;
+}
+
+.barcode-wrapper {
+    display: flex;
+    justify-content: center;
+    padding-top: 10px;
+}
+
+/* Angka Total Harga */
+.total-preview-screen {
+    margin-top: 20px;
+    margin-bottom: 5px; /* Jarak sangat sedikit ke tombol */
+    font-size: 2.2rem;
+    font-weight: 800;
+    color: #28a745;
+}
+
+/* Tombol Cetak (Digeser ke Atas) */
+.btn-print-now {
+    width: 100%;
+    max-width: 280px;
+    margin-top: 0; /* Menempel di bawah total */
+    padding: 18px;
+    background: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 1.4rem;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.btn-print-now:active {
+    transform: translateY(2px);
+    background: #218838;
+}
+
+/* =========================================
+   2. LOGIKA CETAK (PRINT SETTINGS)
+   ========================================= */
+#print-area {
+    display: none;
+}
+
+@media print {
+    @page {
+        size: auto;
+        margin: 0;
+    }
+
+    body * {
+        visibility: hidden;
+    }
+
+    #print-area, #print-area * {
+        visibility: visible !important;
+    }
+
+    #print-area {
+        display: block !important;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+    }
+
+    .print-label-thermal {
+        width: 100%;
+        padding: 5px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        box-sizing: border-box;
+    }
+
+    .p-item-name {
+        font-size: 12pt;
+        font-weight: bold;
+        text-align: center;
+        margin: 0;
+        text-transform: uppercase;
+    }
+
+    .p-info-row {
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        font-size: 9pt;
+        border-bottom: 0.5pt solid #000;
+        margin: 4px 0 6px 0;
+        padding-bottom: 2px;
+    }
+
+    #barcode-print {
+        max-width: 100% !important;
+        height: auto !important;
+    }
+}
