@@ -19,8 +19,8 @@ const MasterData = () => {
   }, []);
 
   const fetchData = async () => {
-    const resItem = await axios.get('http://localhost:5000/api/items');
-    const resJenis = await axios.get('http://localhost:5000/api/jenis');
+    const resItem = await axios.get('http://10.10.10.100:5000/api/items');
+    const resJenis = await axios.get('http://10.10.10.100:5000/api/jenis');
     setItems(resItem.data);
     setJenis(resJenis.data);
   };
@@ -31,8 +31,8 @@ const MasterData = () => {
     const data = new FormData();
     Object.keys(itemForm).forEach(key => data.append(key, itemForm[key]));
     
-    if (editId) await axios.put(`http://localhost:5000/api/items/${editId}`, data);
-    else await axios.post('http://localhost:5000/api/items', data);
+    if (editId) await axios.put(`http://10.10.10.100:5000/api/items/${editId}`, data);
+    else await axios.post('http://10.10.10.100:5000/api/items', data);
     
     resetForm();
     fetchData();
@@ -41,8 +41,8 @@ const MasterData = () => {
   // --- LOGIKA JENIS ---
   const handleJenisSubmit = async (e) => {
     e.preventDefault();
-    if (editId) await axios.put(`http://localhost:5000/api/jenis/${editId}`, jenisForm);
-    else await axios.post('http://localhost:5000/api/jenis', jenisForm);
+    if (editId) await axios.put(`http://10.10.10.100:5000/api/jenis/${editId}`, jenisForm);
+    else await axios.post('http://10.10.10.100:5000/api/jenis', jenisForm);
     
     resetForm();
     fetchData();
@@ -56,7 +56,7 @@ const MasterData = () => {
 
   const deleteData = async (type, id) => {
     if (window.confirm("Hapus data ini?")) {
-      await axios.delete(`http://localhost:5000/api/${type}/${id}`);
+      await axios.delete(`http://10.10.10.100:5000/api/${type}/${id}`);
       fetchData();
     }
   };
